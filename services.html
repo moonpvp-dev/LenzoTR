@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lenzo Services</title>
+    <style>
+        body {
+            background-color: #333333;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+        }
+        
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            z-index: 9999;
+            transition: opacity 1s ease; /* Transition for smooth loading screen fade out */
+        }
+        
+        #loading-text {
+            color: purple;
+            font-size: 36px; /* Increased font size */
+            animation: pulsate 2s ease-in-out infinite; /* Animation for pulsating text */
+        }
+        
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Content styles */
+        #content {
+            opacity: 0; /* Hide content initially */
+            transition: opacity 1s ease; /* Transition for content fade in */
+            padding: 20px; /* Add padding for better spacing */
+        }
+        
+        #banner {
+            background-color: #222222;
+            height: 300px; /* Increased height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        #profile-picture {
+            width: 150px; /* Increased width */
+            height: 150px; /* Increased height */
+            border-radius: 50%;
+            margin-bottom: 15px; /* Increased margin */
+            transform: translateY(20px); /* Lowered the profile picture by 20px */
+        }
+        
+        #title {
+            font-size: 27px; /* Increased font size */
+            margin-top: 15px; /* Increased margin */
+        }
+        
+        #headline {
+            font-weight: bold;
+            font-size: 21px; /* Increased font size */
+            margin-bottom: 7.5px; /* Increased margin */
+        }
+        
+        #website-link {
+            font-size: 18px; /* Increased font size */
+            margin-bottom: 30px; /* Increased margin */
+        }
+        
+        #separator {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Adjusted separator color */
+            margin: 0 auto 30px auto; /* Increased margin */
+        }
+        
+        #money {
+            font-weight: bold;
+            font-size: 36px; /* Increased font size */
+            margin-top: 45px; /* Increased margin */
+            text-align: center;
+        }
+        
+        #per-week {
+            font-size: 18px; /* Increased font size */
+        }
+        
+        #rectangle-banner {
+            background-color: #444444; /* Updated background color */
+            border: 1px solid #888888; /* Added border */
+            width: 300px; /* Increased width */
+            height: 120px; /* Increased height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            margin: 30px auto; /* Increased margin */
+        }
+        
+        #rectangle-banner-title {
+            font-weight: bold;
+            font-size: 24px; /* Increased font size */
+            margin-bottom: 7.5px; /* Increased margin */
+        }
+        
+        #rectangle-banner-text {
+            font-size: 21px; /* Increased font size */
+        }
+        
+        /* Media Queries */
+        @media (max-width: 1920px) {
+            #title {
+                font-size: 24px; /* Increased font size */
+            }
+            
+            #headline {
+                font-size: 18px; /* Increased font size */
+            }
+            
+            #website-link {
+                font-size: 15px; /* Increased font size */
+            }
+            
+            #money {
+                font-size: 30px; /* Increased font size */
+            }
+            
+            #per-week {
+                font-size: 15px; /* Increased font size */
+            }
+            
+            #rectangle-banner-title {
+                font-size: 21px; /* Increased font size */
+            }
+            
+            #rectangle-banner-text {
+                font-size: 18px; /* Increased font size */
+            }
+        }
+    </style>
+    <script>
+        // Remove loading screen and show content after a delay
+        window.addEventListener('load', function() {
+            var loadingScreen = document.getElementById('loading-screen');
+            var content = document.getElementById('content');
+            
+            setTimeout(function() {
+                loadingScreen.style.opacity = 0;
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                    content.style.opacity = 1;
+                    animateMoneyIncrement();
+                }, 1000);
+            }, 4000);
+        });
+        
+        // Animate the increment of the money value
+        function animateMoneyIncrement() {
+            var moneyElement = document.getElementById('money');
+            var currentMoney = 0;
+            var targetMoney = 625;
+            var duration = 1500; // Duration in milliseconds
+            var intervalDuration = 30; // Interval duration in milliseconds
+            
+            var increment = (targetMoney - currentMoney) / (duration / intervalDuration);
+            var intervalId = setInterval(function() {
+                currentMoney += increment;
+                moneyElement.textContent = '$' + Math.round(currentMoney);
+                if (currentMoney >= targetMoney) {
+                    clearInterval(intervalId);
+                    moneyElement.textContent = '$' + targetMoney;
+                }
+            }, intervalDuration);
+        }
+    </script>
+</head>
+<body>
+    <div id="loading-screen">
+        <h1 id="loading-text">Lenzo Services</h1>
+    </div>
+    
+    <div id="content">
+        <div id="banner">
+            <img id="profile-picture" src="logo.jpg" alt="User Profile Picture">
+            <h1 id="title">Lenzo Services</h1>
+            <h2 id="headline">This website was made to track purchases from Lenzo Services</h2>
+            <a id="website-link" href="https://www.lenzotr.com">lenzotr.com</a>
+        </div>
+        
+        <div id="separator"></div>
+        
+        <div id="money">$0 <span id="per-week">per week</span></div>
+    	
+        <div id="rectangle-banner">
+            <h3 id="rectangle-banner-title">lxzt</h3>
+            <p id="rectangle-banner-text">Purchased $275 lifetime.</p>
+        </div>
+
+	<div id="rectangle-banner">
+            <h3 id="rectangle-banner-title">Withdraw</h3>
+            <p id="rectangle-banner-text">Purchased $120 per month.</p>
+        </div>
+
+	<div id="rectangle-banner">
+            <h3 id="rectangle-banner-title">Debilx.</h3>
+            <p id="rectangle-banner-text">Purchased $120 per month.</p>
+        </div>
+
+	<div id="rectangle-banner">
+            <h3 id="rectangle-banner-title">Oval</h3>
+            <p id="rectangle-banner-text">Purchased $35 per week.</p>
+        </div>
+
+	<div id="rectangle-banner">
+            <h3 id="rectangle-banner-title">Phd</h3>
+            <p id="rectangle-banner-text">Purchased $5 per day.</p>
+        </div>
+    </div>
+</body>
+</html>

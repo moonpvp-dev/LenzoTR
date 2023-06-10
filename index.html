@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lenzo Services</title>
+    <style>
+        body {
+            background-color: #333333;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+        }
+        
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #222222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            z-index: 9999;
+            transition: opacity 1s ease; /* Transition for smooth loading screen fade out */
+        }
+        
+        #loading-text {
+            color: purple;
+            font-size: 48px; /* Increased font size */
+            animation: pulsate 2s ease-in-out infinite; /* Animation for pulsating text */
+        }
+        
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Content styles */
+        #content {
+            opacity: 0; /* Hide content initially */
+            transition: opacity 1s ease; /* Transition for content fade in */
+            padding: 20px; /* Add padding for better spacing */
+        }
+        
+        .login-form {
+            background-color: #222222;
+            border: 2px solid purple;
+            padding: 40px; /* Increased padding */
+            margin: 50px auto;
+            width: 400px; /* Increased width */
+            box-shadow: 0 0 10px purple;
+        }
+        
+        .login-form h2 {
+            color: purple;
+            text-align: center;
+        }
+        
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: calc(100% - 20px); /* Adjusted width to account for padding */
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid purple;
+            color: #FFFFFF;
+            outline: none;
+            transition: border-bottom-color 0.3s;
+            box-sizing: border-box; /* Include padding in the width calculation */
+        }
+        
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            border-bottom-color: #FF00FF;
+        }
+        
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: purple;
+            border: none;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-form input[type="submit"]:hover {
+            background-color: #FF00FF;
+        }
+        
+        .login-form .password {
+            position: relative;
+        }
+        
+        .login-form .password input[type="password"] {
+            padding-right: 40px;
+        }
+        
+        .login-form .password .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            color: purple;
+            cursor: pointer;
+            line-height: 20px; /* Adjust line height */
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .login-form {
+                width: 90%;
+                max-width: 400px;
+            }
+        }
+    </style>
+    <script>
+        // Remove loading screen and show content after a delay
+        window.addEventListener('load', function() {
+            var loadingScreen = document.getElementById('loading-screen');
+            var content = document.getElementById('content');
+            
+            setTimeout(function() {
+                loadingScreen.style.opacity = 0;
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                    content.style.opacity = 1;
+                }, 1000);
+            }, 4000);
+        });
+        
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById('password-input');
+            var passwordToggle = document.getElementById('password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = 'Show';
+            }
+        }
+        
+        // Submit login form
+        function submitLoginForm() {
+            var usernameInput = document.getElementById('username-input');
+            var passwordInput = document.getElementById('password-input');
+            
+            if (usernameInput.value === 'Moon' && passwordInput.value === 'Admin') {
+                window.location.href = 'services.html';
+            } else {
+                alert('Invalid login credentials!');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="loading-screen">
+        <h1 id="loading-text">Lenzo Services</h1>
+    </div>
+    
+    <div id="content">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form onsubmit="event.preventDefault(); submitLoginForm();">
+                <input type="text" id="username-input" placeholder="Username" required>
+                <div class="password">
+                    <input type="password" id="password-input" placeholder="Password" required>
+                    <span id="password-toggle" class="password-toggle" onclick="togglePasswordVisibility()">Show</span>
+                </div>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
